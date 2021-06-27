@@ -63,7 +63,7 @@
                              colliderEndEventProperty: clearedEls;">
         </a-entity>
         <a-assets>
-            <!-- box component mixin -->
+            <!-- cube component mixin -->
             <a-mixin id="cube" class="cube" geometry="primitive: box; width: 1; height: 1; depth: 1" hoverable grabbable
                 stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
@@ -176,9 +176,9 @@
         <a-entity laser-controls="hand: right" raycaster="objects: cube" grabbable dropable oculus-touch-controls
             generic-tracked-controller-controls super-hands window-motion-controls>
         </a-entity> -->
-        <a-entity oculus-touch-controls="hand: left" raycaster="objects: cube" grabbable dropable>
+        <a-entity oculus-go-controls="hand: left" raycaster="objects: [mixin = 'cube']" grabbable dropable super-hands>
         </a-entity>
-        <a-entity oculus-touch-controls="hand: right" raycaster="objects: cube" grabbable dropable>
+        <a-entity oculus-go-controls="hand: right" raycaster="objects: [mixin = 'cube']" grabbable dropable super-hands>
         </a-entity>
         <!-- <a-entity>
             <a-camera positon="0 1.6 0"></a-camera>
