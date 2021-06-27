@@ -54,7 +54,7 @@
 
 <body>
 
-    <a-scene physics="gravity: 0;">
+    <a-scene physics="gravity: 0;" webxr="referenceSpaceType: local" vr-mode-ui>
         <!-- camera -->
         <a-entity movement-controls="speed: 5" camera look-controls wasd-controls position="0 1.6 0" capture-mouse
             raycaster cursor="rayOrigin:mouse" body="type: static; shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;
@@ -176,11 +176,11 @@
         <a-entity laser-controls="hand: right" raycaster="objects: cube" grabbable dropable oculus-touch-controls
             generic-tracked-controller-controls super-hands window-motion-controls>
         </a-entity> -->
-        <a-entity oculus-touch-controls="hand: left" raycaster="objects: [mixin = 'cube']" grabbable dropable
-            laser-controls="hand: left" super-hands>
+        <a-entity oculus-touch-controls hand-controls="hand: left" raycaster="objects: [mixin = 'cube']" grabbable
+            droppable laser-controls="hand: left" super-hands>
         </a-entity>
-        <a-entity oculus-touch-controls="hand: right" raycaster="objects: [mixin = 'cube']" grabbable dropable
-            laser-controls="hand: right" super-hands>
+        <a-entity oculus-touch-controls hand-controls="hand: right" raycaster="objects: [mixin = 'cube']" grabbable
+            droppable laser-controls="hand: right" super-hands>
         </a-entity>
         <!-- <a-entity>
             <a-camera positon="0 1.6 0"></a-camera>
