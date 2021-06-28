@@ -47,6 +47,24 @@
 
         function firefox() {
             document.getElementById('firefox').setAttribute('visible', 'true');
+            document.getElementById('demo').setAttribute('visible', 'true');
+        }
+
+        function terminal() {
+            document.getElementById('terminal').setAttribute('visible', 'true');
+        }
+
+        function procApp() {
+            document.getElementById('proc1').setAttribute('visible', 'true');
+            document.getElementById('proc2').setAttribute('visible', 'true');
+        }
+
+        function finderOpen() {
+            document.getElementById('findwind').setAttribute('visible', 'true');
+        }
+
+        function oculusOpen() {
+            document.getElementById('ocwindow').setAttribute('visible', 'true');
         }
     </script>
 
@@ -56,7 +74,7 @@
 
     <a-scene physics="gravity: 0;" webxr="referenceSpaceType: local" vr-mode-ui>
         <!-- camera -->
-        <a-entity movement-controls="speed: 5" camera look-controls wasd-controls position="0 1.6 0" capture-mouse
+        <a-entity movement-controls="speed: 3.5" camera look-controls wasd-controls position="0 1.6 0" capture-mouse
             raycaster cursor="rayOrigin:mouse" body="type: static; shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;
                              colliderEventProperty: els;
                              colliderEndEvent:raycaster-intersection-cleared;
@@ -120,13 +138,15 @@
                 <!-- MP4 video source. -->
                 <source type="video/mp4" src="assets/fullaudioblack.mp4" />
             </video>
-            <image id="desktop" src="assets/grass-field.jpeg"></image>
+            <image id="desktop" src="assets/night-sky.jpeg"></image>
+            <image id="desktop2" src="assets/grass-field.jpeg"></image>
             <!-- apps -->
             <image id="psdicon" src="assets/apps/psdicon.png"></image>
             <image id="fireapp" src="assets/apps/firefox.png"></image>
             <image id="papp" src="assets/apps/processing.jpeg"></image>
             <image id="term" src="assets/apps/terminallogo.png"></image>
             <image id="finder" src="assets/apps/finder.png"></image>
+            <image id="ocapp" src="assets/apps/oculuslogo.jpeg"></image>
             <!-- windows -->
             <image id="psd" src="assets/windows/psd.png"></image>
             <image id="adj" src="assets/windows/adj.png"></image>
@@ -135,14 +155,17 @@
             <image id="shapes" src="assets/windows/shapes.png"></image>
             <image id="styles" src="assets/windows/styles.png"></image>
             <image id="swatches" src="assets/windows/swatches.png"></image>
-            <image id="terminal" src="assets/windows/terminal.png"></image>
+            <image id="term1" src="assets/windows/terminal.png"></image>
+            <image id="aframe" src="assets/devhub.png"></image>
             <image id="continue" src="assets/windows/continue.png"></image>
             <image id="vrbg" src="assets/equirectpixels.png"></image>
             <image id="notes" src="assets/windows/notesapp.png"></image>
-            <image id="firefox" src="assets/windows/aframe.png"></image>
+            <image id="fire" src="assets/windows/aframe.png"></image>
             <image id="code" src="assets/code.png"></image>
+            <image id="oculus" src="assets/oculus.png"></image>
             <image id="processing" src="assets/windows/processing.png"></image>
             <image id="glitch" src="assets/windows/glitch.png"></image>
+            <image id="fwindow" src="assets/finderwindow.png"></image>
             <video id="wip" style="display:none" autoplay loop="true" volume="0" muted crossorigin="anonymous"
                 playsinline webkit-playsinline>
                 <!-- MP4 video source. -->
@@ -191,7 +214,7 @@
         </a-entity> -->
 
         <!-- scene 1 -->
-        <a-entity id="scene1" visible="true">
+        <a-entity id="scene1" visible="false">
             <a-videosphere src="#audio"></a-videosphere>
             <a-videosphere src="#rgb" muted></a-videosphere>
             <a-videosphere src="#rgb" muted rotation="90 0 0" loop="true" segments-width="0.01" segments-height="0.01"
@@ -531,44 +554,63 @@
         </a-entity>
 
         <!-- scene 3 -->
-        <a-entity id="scene3" visible="false">
+        <a-entity id="scene3" visible="true">
             <a-sky src="#desktop"></a-sky>
-
+            <a-sky src="#desktop2" opacity="0.3"></a-sky>
             <!-- transition to credits -->
-            <a-curvedimage src="#notes" height="3" radius="3" theta-length="70" position="2 1.5 -25" rotation="0 90 0"
-                scale="1 1 1"
-                animation="property: scale; to: 1.3 1.3 1.3; dur: 3000; loop: true; easing: easeOutElastic">
+            <a-entity text="value: return to 2D...;" position="0 17 -19" rotation="90 0 0" scale="5 5 5">
+            </a-entity>
+            <a-entity text="value: return to 2D...;" position="-3 17 -20" rotation="90 90 0" scale="5 5 5"></a-entity>
+            <a-entity text="value: return to 2D...;" position="-4 17 -17" rotation="90 180 0" scale="5 5 5"></a-entity>
+            <a-entity text="value: return to 2D...;" position="-1 17 -16" rotation="90 -90 0" scale="5 5 5"></a-entity>
+            <a-plane visible="false" position="0 17 -17">
                 <a-link href="end.html" visible="false"></a-link>
-            </a-curvedimage>
+            </a-plane>
 
             <!-- windows -->
-            <a-curvedimage src="#firefox" id="firefox" visible="true" height="3" radius="5" theta-length="60"
+            <a-curvedimage src="#fire" id="firefox" visible="false" height="3" radius="5" theta-length="60"
                 position="7 2 -21" rotation="0 45 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-            <a-curvedimage src="#code" height="3" radius="5" theta-length="30" position="0 0 -21" rotation="0 180 0"
-                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+            <a-curvedimage src="#code" height="3" radius="5" scale="7 7 7" theta-length="30" position="0 0 -30"
+                rotation="0 180 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 7.1 7.1 7.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 7 7 7">
+            </a-curvedimage>
+            <a-curvedimage src="#term1" id="terminal" visible="false" height="3" radius="5" theta-length="50"
+                position="0 5 -25" rotation="0 135 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-            <a-curvedimage src="#terminal" height="3" radius="5" theta-length="50" position="0 5 -21" rotation="0 135 0"
-                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+            <a-curvedimage src="#glitch" id="proc2" height="3" radius="5" visible="false" theta-length="50"
+                position="0 0 -18" rotation="0 0 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-            <a-curvedimage src="#glitch" height="3" radius="5" theta-length="50" position="0 0 -18" rotation="0 0 0"
-                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+            <a-curvedimage src="#fwindow" id="findwind" height="3" radius="5" visible="false" theta-length="50"
+                position="-8 0 -25" rotation="0 -100 0" scale="1 1 1" hoverable grabbable stretchable draggable
+                droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#processing" id="proc1" height="3" radius="5" visible="false" theta-length="30"
+                position="0 5 -20" rotation="0 0 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
+                event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
+            </a-curvedimage>
+            <a-curvedimage src="#aframe" id="ocwindow" height="3" radius="5" visible="false" theta-length="50"
+                position="1.7 2 -20" rotation="0 -50 0" scale="1 1 1" hoverable grabbable stretchable draggable
+                droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
 
-            <a-curvedimage src="#processing" height="3" radius="5" theta-length="30" position="0 5 -20" rotation="0 0 0"
-                scale="1 1 1" hoverable grabbable stretchable draggable droppable
+            <a-curvedimage src="#oculus" id="demo" height="3" radius="5" visible="false" theta-length="50"
+                position="0 3 -20" rotation="0 120 0" scale="1 1 1" hoverable grabbable stretchable draggable droppable
                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true; scale: 1.1 1.1 1.1"
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-curvedimage>
-
             <!-- photoshop -->
             <a-curvedimage src="#psd" id="window" visible="false" height="3" radius="5" theta-length="60"
                 position="-3 3 -17" rotation="0 -100 0" scale="1 1 1" hoverable grabbable stretchable draggable
@@ -607,17 +649,6 @@
                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false; scale: 1 1 1">
             </a-image>
 
-            <!-- apps -->
-            <a-box src="#psdicon" position="-7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
-                draggable droppable onclick="appOpen()"></a-box>
-            <a-box src="#fireapp" position="7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
-                draggable droppable onclick="firefox()"></a-box>
-            <a-box src="#papp" position="1 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
-                draggable droppable></a-box>
-            <a-box src="#term" position="10 -1 -23" height="1" width="1" depth="1" hoverable grabbable stretchable
-                draggable droppable></a-box>
-            <a-box src="#finder" position="-10 -1 -23" height="1" width="1" depth="1" hoverable grabbable stretchable
-                draggable droppable></a-box>
 
 
             <!-- videos -->
@@ -627,8 +658,22 @@
                 stretchable draggable droppable></a-video>
             <a-video src="#pce" position="-8 6 -17" height="3" width="4.5" rotation="0 100 0" hoverable grabbable
                 stretchable draggable droppable></a-video>
-            <a-video src="#youtube" position="10 5 -22" height="3" width="5" rotation="0 100 0" hoverable grabbable
-                stretchable draggable droppable></a-video>
+            <a-video src="#youtube" id="youtube" visible="true" position="10 5 -22" height="3" width="5"
+                rotation="0 100 0" hoverable grabbable stretchable draggable droppable></a-video>
+
+            <!-- apps -->
+            <a-box src="#psdicon" position="-7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="appOpen()"></a-box>
+            <a-box src="#fireapp" position="7 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="firefox()"></a-box>
+            <a-box src="#papp" position="1 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="procApp()"></a-box>
+            <a-box src="#term" position="0 -1 -25" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="terminal()"></a-box>
+            <a-box src="#finder" position="-10 -1 -23" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="finderOpen()"></a-box>
+            <a-box src="#ocapp" position="-3 -1 -17" height="1" width="1" depth="1" hoverable grabbable stretchable
+                draggable droppable onclick="oculusOpen()"></a-box>
         </a-entity>
     </a-scene>
 </body>
